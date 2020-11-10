@@ -1,4 +1,5 @@
-Get-WindowsFeature AD-Domain-Services | Install WindowsFeature
+Rename-Computer -NewName "poseidon"
+Get-WindowsFeature AD-Domain-Services | Install-WindowsFeature
 Import-Module addsdeployment
 Install-ADDSForest
 Install-WindowsFeature DHCP -IncludeManagementTools
