@@ -1,6 +1,6 @@
 Get-WindowsFeature AD-Domain-Services | Install-WindowsFeature
 Import-Module addsdeployment
-Install-ADDSForest -DomainName jdk0003 -SafeModeAdministratorPassword (ConvertTo-SecureString -AsPlainText "Cyb3rs3curity" -Force) -Force
+Install-ADDSForest
 Install-WindowsFeature DHCP -IncludeManagementTools
 netsh dhcp add securitygroups
 Restart-Service dhcpserver
