@@ -1,6 +1,6 @@
 Get-WindowsFeature AD-Domain-Services | Install-WindowsFeature
 Import-Module addsdeployment
-Install-ADDSForest -DomainName "jdk0003" -SafeModeAdministratorPassword "Cyb3rs3curity" -Force
+Install-ADDSForest -DomainName jdk0003 -SafeModeAdministratorPassword (ConvertTo-SecureString -AsPlainText "Cyb3rs3curity" -Force) -Force
 Install-WindowsFeature DHCP -IncludeManagementTools
 netsh dhcp add securitygroups
 Restart-Service dhcpserver
@@ -13,6 +13,8 @@ Add-DHCPServerv4Reservation -ScopeID 192.168.101.0 -IPAddress 192.168.101.3 -Cli
 Add-DHCPServerv4Reservation -ScopeID 192.168.101.0 -IPAddress 192.168.101.2 -ClientID “06:3D:2E:6A:C2:86” -Description “Zeus”
 Add-DHCPServerv4Reservation -ScopeID 192.168.101.0 -IPAddress 192.168.101.5 -ClientID “D6:02:BC:E5:AD:CD” -Description “Apollo”
 Restart-Service dhcpserver
+Add-DNSServerForwarder -IPAddress 157.182.203.110 -PassThru
+Add-DNSServerPrimaryZone -Name jdk0003.internal -Zonefile "jdk0003.internal.dns"
 Add-DNSServerResourceRecordA -Name “zeus.jdk0003.internal” -ZoneName “jdk0003.internal” -IPv4Address “192.168.101.2” -TimeToLive 01:00:00
 Add-DNSServerResourceRecordA -Name “hades.jdk0003.internal” -ZoneName “jdk0003.internal” -IPv4Address “192.168.101.3” -TimeToLive 01:00:00
 Add-DNSServerResourceRecordA -Name “poseidon.jdk0003.internal” -ZoneName “jdk0003.internal” -IPv4Address “192.168.101.4” -TimeToLive 01:00:00
