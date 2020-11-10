@@ -1,7 +1,6 @@
-Rename-Computer -NewName "poseidon"
 Get-WindowsFeature AD-Domain-Services | Install-WindowsFeature
 Import-Module addsdeployment
-Install-ADDSForest
+Install-ADDSForest -DomainName "jdk0003" -SafeModeAdministratorPassword "Cyb3rs3curity" -Force
 Install-WindowsFeature DHCP -IncludeManagementTools
 netsh dhcp add securitygroups
 Restart-Service dhcpserver
@@ -26,3 +25,5 @@ New-ADUser -Name “cybe466grader” -GivenName cybe466 -Surname grader -SamAcco
 Set-ADAccountPassword “CN=cybe466grader,CN=users,DC=jdk0003,DC=internal” -Reset -NewPassword (ConvertTo-SecureString -AsPlainText “Cyb3rs3curity” -Force)
 Enable-ADAccount -Identity cybe466grader
 ADD-ADGroupMember “Domain Admins” cybe466grader
+Rename-Computer -NewName "poseidon"
+Reboot
